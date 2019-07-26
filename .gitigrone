@@ -1,0 +1,5 @@
+__pycache__/
+pyvenv/
+app/__pycache__/
+app/views/__pycache__/
+*.pyc
