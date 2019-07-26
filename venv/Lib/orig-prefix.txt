@@ -1,0 +1,1 @@
+d:\anaconda3\envs\my_python
