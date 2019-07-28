@@ -28,12 +28,13 @@
     <!--jinja2 meta块-->
     {% block meta %}<!-- block meta  -->{% endblock %}
     <!--jinja2 title块-->
-    <title>{% block title %} ? {% endblock %}| AwesomeDavidBlog</title>
-    <link rel="stylesheet" href="/static/css/uikit.min.css">
+    <title>{% block title %} {% endblock %}| 在渊's 博客</title>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/uikit.min.css')}}" >
     <link rel="stylesheet" href="/static/css/awesome.css" />
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/sha1.min.js"></script>
     <script src="/static/js/uikit.min.js"></script>
+    <script src="{{url_for('static', filename = 'js/uikit.min.js')}}"></script>
     <script src="/static/js/icons.min.js"></script>
     <script src="/static/js/sticky.min.js"></script>
     <script src="/static/js/vue.min.js"></script>

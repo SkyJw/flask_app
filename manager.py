@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 #flask scripte 脚本命令处理文件
 
 from app import create_app
