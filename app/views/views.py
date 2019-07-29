@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, request, Response, make_response, redirect, url_for, session
-
+from flask import Blueprint, render_template, request, Response
+from flask import make_response, redirect, url_for, session, flash
 #url和xxx.html没有绝对的对应关系
 
 #蓝图模版路径的起点是创建蓝图的文件的所在路径
@@ -24,7 +24,7 @@ def index():
 
 @blog_bp.route('/login/')
 def user_login():
-	return render_template('UserLogin.html')
+	return render_template('Signin.html')
 
 @blog_bp.route('/logout/')
 def user_logout():
@@ -48,4 +48,5 @@ def do_user_login():
 
 @blog_bp.route('/hellobootstrap')
 def hello_bs():
+	flash('You were successfully logged in')
 	return render_template('hello_bootstrap.html')

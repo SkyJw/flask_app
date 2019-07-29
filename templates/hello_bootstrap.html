@@ -64,3 +64,34 @@
     </div><!-- /.container-fluid -->
 </nav>
 {% endblock %}
+
+{% block content %}
+<!--
+<div class="jumbotron">
+    <div class="container">
+        <h1>Hello, world!</h1>
+        <p>...</p>
+        <p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </p>
+    </div>
+</div>
+-->
+<div class="container">
+    <div class="jumbotron">
+        <h1>Hello, world!</h1>
+        <p>...</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+    </div>
+</div>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+{% endblock %}
