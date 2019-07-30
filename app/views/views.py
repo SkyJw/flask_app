@@ -10,6 +10,9 @@ from app.models import User
 #想指定静态文件路径时，发现在蓝图处使用static_folder参数指定不好使，需要在创建Flask时指定
 blog_bp = Blueprint('blog', __name__, template_folder = '../../templates')
 
+def init_blueprint(app):
+	app.register_blueprint(blueprint=blog_bp)
+
 
 @blog_bp.route('/')
 def test():
