@@ -4,7 +4,7 @@ from flask import Flask, session
 from flask_session import Session
 from redis import StrictRedis
 from flask_bootstrap import Bootstrap
-
+from app.models import init_db
 from app.views.views import blog_bp
 
 def create_app():
@@ -14,13 +14,15 @@ def create_app():
     app.config["SECRET_KEY"] = 'fjw123520999'
     app.config['SESSION_TYPE'] = 'redis'
     app.config['SESSION_REDIS'] = StrictRedis(host='localhost', port=6379)    
-    #app.config['SESSION_REDIS'] = StrictRedis(host='localhost', port=6379,decode_responses=True)
 
     Session(app)
     Bootstrap(app)
+
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    init_db(app)
     
 	#url_prefix：添加url链接前缀
     #app.register_blueprint(blueprint=blog_bp, url_prefix = '/blog')
-    app.register_blueprint(blueprint=blog_bp) 
+    app.register_blueprint(blueprint=blog_bp)
 
     return app
