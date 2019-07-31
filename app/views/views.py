@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, request, Response
 from flask import make_response, redirect, url_for, session, flash
 
-from app.models import db
+from app.ext import db
 from app.models import User
 
 #url和xxx.html没有绝对的对应关系
@@ -38,19 +38,24 @@ def user_logout():
 
 @blog_bp.route('/douserlogin', methods = ['POST', 'GET'])
 def do_user_login():
-	name = request.form.get('username')
 
-	print(name)
+	if request.method == 'POST':
+		email  = request.form.get('email')
+		passwd = request.form.get('passwd')
 
-	resp = redirect(url_for('blog.index'))
+		user = User(email = email, passwd = passwd)
+		db.session.add(user)
+		db.session.commit()
 
-	#cookies方式跨页面获取数据，首先在服务器端设置cookie
-	#resp.set_cookie('username', name)
+		#resp = redirect(url_for('blog.index'))
 
-	#session方式跨页面
-	session['username'] = name
+		#cookies方式跨页面获取数据，首先在服务器端设置cookie
+		#resp.set_cookie('username', name)
 
-	return resp
+		#session方式跨页面
+		#session['username'] = name
+
+		return 'successfully register'
 
 @blog_bp.route('/hellobootstrap/')
 def hello_bs():
@@ -60,6 +65,12 @@ def hello_bs():
 @blog_bp.route('/creatdb/')
 def creat_db():
 	db.create_all()
+
+	return 'creat db'
+
+@blog_bp.route('/dropdb/')
+def drop_db():
+	db.drop_all()
 
 	return 'creat db'
 
@@ -78,4 +89,4 @@ def get_user():
 	print(type(users))
 	print(users)
 
-	return 'get user %s %s' % (users[0].username, type(users))
+	return 'get user %s %s' % (users[0].email, type(users))

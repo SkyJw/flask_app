@@ -15,7 +15,7 @@ def get_db_url(dbinfo):
 
     NAME = dbinfo.get('NAME') or 'flask_blog'
 
-    return '{}+{}://{}:{}@{}/{}'.format(ENGINE, DRIVER, USER, PASSWORD, HOST, PORT, NAME)
+    return '{}+{}://{}:{}@{}:{}/{}'.format(ENGINE, DRIVER, USER, PASSWORD, HOST, PORT, NAME)
 
 
 class Config:
@@ -37,14 +37,14 @@ class DevelopConfig(Config):
     DATABASE = {
         'ENGINE': 'mysql',
         'DRIVER': 'pymysql',
-        'USER': 'root',
+        'USER': 'SkyJw',
         'PASSWORD': '123ll520',
         'HOST': 'localhost',
         'PORT': '3306',
         'NAME': 'flask_blog'
     }
 
-    SQLALCHEMY_DATABASE_URL = get_db_url(DATABASE)
+    SQLALCHEMY_DATABASE_URI = get_db_url(DATABASE)
 
 class TestingConfig(Config):
     TESTING = True

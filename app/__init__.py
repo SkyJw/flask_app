@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
-#初始化flask app，注册蓝图
-from flask import Flask, session
-from flask_session import Session
-
-from flask_bootstrap import Bootstrap
-
-from app.models import init_db
+from flask import Flask
 from app.views.views import init_blueprint
-from app.setting import envs
+from app.settings import envs
+from app.ext import init_ext
 
 def create_app():
     #使用static_folder参数指定static文件路径，html中去获取static文件时，默认的起点路径变成此处指定的路径
@@ -22,11 +17,7 @@ def create_app():
     #采用单独文件存储配置对象，对app进行配置
     app.config.from_object(envs.get('develop'))
 
-    Session(app)
-    Bootstrap(app)
-
-    
-    init_db(app)
+    init_ext(app)
     
     init_blueprint(app)
 
