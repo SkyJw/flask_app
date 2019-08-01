@@ -1,11 +1,11 @@
 import time, uuid
-
+import datetime
 from app.ext import db
 
 def next_id():
     #返回UUID，%015d表示用15宽度显示，不足15高位补0
     return '%015d%s000' % (int(time.time() * 1000), uuid.uuid4().hex)
-
+''''''
 class User(db.Model):
     id = db.Column(db.String(100), primary_key=True, default = next_id)
     email = db.Column(db.String(120), unique=True, nullable=False) #email作用户名
@@ -16,9 +16,10 @@ class User(db.Model):
         #return '<User %r>' % self.email
 
 class Blog(db.Model):
-    id = db.Column(db.String(100), primary_key=True, default = next_id)
-    user_id = db.Column(db.String(100), nullable = False)
-    email = db.Column(db.String(120), nullable=False)
-    summary = db.Column(db.Text, nullable = True)
-    content = db.Column(db.Text, nullable = False)
-    created_at = created_at = db.Column(db.Float, default = time.time)
+    post_id = db.Column(db.String(100), primary_key=True, default = next_id)
+    #user_id = db.Column(db.String(100), nullable = False)
+    post_by = db.Column(db.String(120), nullable=False)
+    post_title = db.Column(db.Text, nullable = False)
+    post_subtitle = db.Column(db.Text, nullable = False)
+    post_main = db.Column(db.Text, nullable = False)
+    created_at = db.Column(db.DateTime, default = datetime.datetime.now)

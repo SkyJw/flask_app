@@ -36,7 +36,7 @@ class DevelopConfig(Config):
 
     DATABASE = {
         'ENGINE': 'mysql',
-        'DRIVER': 'pymysql',
+        'DRIVER': 'mysqlconnector',
         'USER': 'SkyJw',
         'PASSWORD': '123ll520',
         'HOST': 'localhost',

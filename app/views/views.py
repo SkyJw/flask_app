@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request, Response
 from flask import make_response, redirect, url_for, session, flash
 
 from app.ext import db
-from app.models import User
+from app.models import User, Blog
 
 #url和xxx.html没有绝对的对应关系
 #蓝图模版路径的起点是创建蓝图的文件的所在路径
@@ -15,8 +15,8 @@ def init_blueprint(app):
 
 
 @blog_bp.route('/')
-def test():
-	return 'Hello'
+def root():
+	return render_template('index.html')
 
 @blog_bp.route('/index/')
 def index():
@@ -24,9 +24,12 @@ def index():
 	#username = request.cookies.get('username', '游客')
 
 	#session方式跨页面
-	username = session.get('username','游客')
+	#username = session.get('username','游客')
 
-	return render_template('index.html', username = username)
+	#return render_template('index.html', username = username)
+	blogs = Blog.query.all()
+
+	return render_template('index.html', blogs = blogs)
 
 @blog_bp.route('/login/')
 def user_login():
@@ -90,3 +93,12 @@ def get_user():
 	print(users)
 
 	return 'get user %s %s' % (users[0].email, type(users))
+
+@blog_bp.route('/createblog/')
+def create_blog():
+
+	blog = Blog(post_by = 'SkyJw', post_title= '我的第一篇博客', post_subtitle = 'Hello world!', post_main = 'test')
+	db.session.add(blog)
+	db.session.commit()
+
+	return 'create blog successed!'
